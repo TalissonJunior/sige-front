@@ -1,11 +1,11 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
   <h5 class="my-0 mr-md-auto font-weight-normal">Sige</h5>
   <nav class="my-2 my-md-0 mr-md-3 nav">
-    <a class="nav-link active" href="#">Produtos</a>
-    <a class="text-dark nav-link" href="#">Pedidos</a>
-    <a class="text-dark nav-link" href="#">Contas</a>
-    <a class="text-dark nav-link" href="#">Veículos</a>
-    <a class="text-dark nav-link" href="#">Revisões</a>
-    <a class="text-dark nav-link" href="#">Serviços</a>
+    <a [ngClass]="{'text-dark' : !rlaProducts.isActive}" routerLinkActive="active" [routerLink]="['/products' || '/products/details']" routerLinkActive #rlaProducts="routerLinkActive" class="nav-link">Produtos</a>
+    <a [ngClass]="{'text-dark' : !rlaOrders.isActive}" routerLinkActive="active" [routerLink]="['/orders' || '/orders/details']" routerLinkActive #rlaOrders="routerLinkActive" class="nav-link">Pedidos</a>
+    <a [ngClass]="{'text-dark' : !rlaBills.isActive}" routerLinkActive="active" [routerLink]="['/bills' || '/bills/details']" routerLinkActive #rlaBills="routerLinkActive" class="nav-link">Contas</a>
+    <a [ngClass]="{'text-dark' : !rlaVehicles.isActive}" routerLinkActive="active" [routerLink]="['/vehicles' || '/vehicles/details']" routerLinkActive #rlaVehicles="routerLinkActive" class="nav-link">Veículos</a>
+    <a [ngClass]="{'text-dark' : !rlaRevisions.isActive}" routerLinkActive="active" [routerLink]="['/revisions' || '/revisions/details']" routerLinkActive #rlaRevisions="routerLinkActive" class="nav-link">Revisões</a>
+    <a [ngClass]="{'text-dark' : !rlaServices.isActive}" routerLinkActive="active" [routerLink]="['/services' || '/services/details']" routerLinkActive #rlaServices="routerLinkActive" class="nav-link">Serviços</a>
   </nav>
 </div>

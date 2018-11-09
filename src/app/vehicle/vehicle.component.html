@@ -1,11 +1,11 @@
 <div class="container">
 
-  <button [routerLink]="['./details/0']" type="button" class="float-right btn btn-primary">Novo Produto</button>
+  <button [routerLink]="['./details/0']" type="button" class="float-right btn btn-primary">Novo Veículo</button>
 
   <ng-container *ngIf="models.length">
 
     <div class="pricing-header mb-3 py-3 pt-md-5 pb-md-4 mx-auto text-left">
-      <h3 class="display-5 mb-3">Lista de produtos</h3>
+      <h3 class="display-5 mb-3">Lista de veículos</h3>
 
       <div class="input-group search mb-3">
         <input type="text" [(ngModel)]="search" class="form-control" placeholder="Pesquisar...">
@@ -17,20 +17,22 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
-          <th scope="col">Preço</th>
-          <th scope="col">Quantidade mín.</th>
-          <th scope="col">Quantidade</th>
+          <th scope="col">Placa</th>
+          <th scope="col">status</th>
+          <th scope="col">Próxima revisão</th>
+          <th scope="col">Última revisão</th>
           <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let model of models | filter: search : ['name', 'price', 'minCount', 'count']; let i = index;">
+        <tr *ngFor="let model of models | filter: search : ['name', 'licensePlate', 'isOk', 'nextRevision', 'lastRevision']; let i = index;">
           <ng-container *ngIf="model !== -1">
             <th scope="row">{{i + 1}}</th>
             <td>{{model.name}}</td>
-            <td>{{model.price}}</td>
-            <td>{{model.minCount}}</td>
-            <td>{{model.count}}</td>
+            <td>{{model.licensePlate}}</td>
+            <td>{{model.isOk ? 'sim' : 'não'}}</td>
+            <td>{{model.nextRevision | date: 'dd-MM-yyyy'}}</td>
+            <td>{{model.lastRevision | date: 'dd-MM-yyyy'}}</td>
             <td>
               <button type="button" class="btn btn-light btn-sm mr-3" (click)="edit(model.id)">Editar</button>
               <button type="button" class="btn btn-danger btn-sm" (click)="delete(model.id)">Excluir</button>
@@ -44,8 +46,8 @@
 
   <div *ngIf="!models.length" class="row no-margin h-fullscreen" style="padding-top: 10%">
     <div class="col-12">
-      <h3 class="text-uppercase">Nenhum produto adicionado</h3>
-      <p class="lead">Clique no botão do canto superior direito para adicionar um novo produto.</p>
+      <h3 class="text-uppercase">Nenhum veículo adicionado</h3>
+      <p class="lead">Clique no botão do canto superior direito para adicionar um novo veículo.</p>
       <br>
     </div>
   </div>

@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Product } from './models/product';
+import { Service } from '../models/service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ServiceService {
   private _obs = {
     onValue: new Subject(),
     onError: new Subject()
@@ -35,17 +35,16 @@ export class ProductService {
     }
   }
 
-  
-  getAll(): Observable<Array<Product>> {
-    return this._http.get<Array<Product>>(environment.apiUrl + '/products');
+  getAll(): Observable<Array<Service>> {
+    return this._http.get<Array<Service>>(environment.apiUrl + '/services');
   }
 
-  getByID(id: number): Observable<Product> {
-    return this._http.get<Product>(environment.apiUrl + '/products' + id);
+  getByID(id: number): Observable<Service> {
+    return this._http.get<Service>(environment.apiUrl + '/services/' + id);
   }
 
-  insert(model: any): Observable<any> {
-    return this._http.post<any>(environment.apiUrl + '/products', model)
+  insert(model: Service): Observable<any> {
+    return this._http.post<any>(environment.apiUrl + '/services', model)
       .pipe(map((response) => {
         this._emitValueEventWithGetAll();
 
@@ -53,8 +52,9 @@ export class ProductService {
       }));
   }
 
-  edit(model: any): Observable<boolean> {
-    return this._http.put<boolean>(environment.apiUrl + '/products', model)
+  edit(id:number, model: Service): Observable<any> {
+   
+    return this._http.put(environment.apiUrl + '/services/'+ id, model)
       .pipe(map((response) => {
         this._emitValueEventWithGetAll();
 
@@ -63,7 +63,7 @@ export class ProductService {
   }
 
   delete(id: number): Observable<boolean> {
-    return this._http.delete<boolean>(environment.apiUrl + '/products/' + id)
+    return this._http.delete<boolean>(environment.apiUrl + '/services/' + id)
       .pipe(map((response) => {
         this._emitValueEventWithGetAll();
 
@@ -77,5 +77,4 @@ export class ProductService {
     },
       (error) => this._obs.onError.next(error));
   }
-
 }

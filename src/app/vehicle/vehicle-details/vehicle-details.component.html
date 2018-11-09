@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 order-md-1">
+      <h4 class="mb-3">Novo Veículo</h4>
+      <form [formGroup]="form">
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label>Nome</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Informe...">
+          </div>
+
+          <div class="col-md-4 mb-3 ">
+            <label>Placa</label>
+            <div class="input-group">
+              <input formControlName="licensePlate" type="number" class="form-control" placeholder="Informe...">
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <label for="state">Status</label>
+            <select class="custom-select d-block w-100" formControlName="isOk">
+              <option value="true">ok</option>
+              <option value="false">não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>Próxima revisão</label>
+            <div class="input-group">
+              <input formControlName="nextRevision" type="date" class="form-control" placeholder="Informe...">
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>última revisão</label>
+            <input formControlName="lastRevision" type="date" class="form-control" placeholder="Informe...">
+          </div>
+
+        </div>
+
+        <div class="float-right">
+          <button class="btn btn-light mr-3" [routerLink]="['/vehicles']">Cancelar</button>
+          <button class="btn btn-primary" [disabled]="form.invalid" (click)="save()">Salvar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+
+    <button [routerLink]="['./details/0']" type="button" class="float-right btn btn-primary">Novo Pedido</button>
+  
+    <ng-container *ngIf="models.length">
+  
+      <div class="pricing-header mb-3 py-3 pt-md-5 pb-md-4 mx-auto text-left">
+        <h3 class="display-5 mb-3">Lista de pedidos</h3>
+  
+        <div class="input-group search mb-3">
+          <input type="text" [(ngModel)]="search" class="form-control" placeholder="Pesquisar...">
+        </div>
+      </div>
+  
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Data</th>
+            <th scope="col">Quantidade de produtos</th>
+            <th scope="col">status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let model of models | filter: search : ['price', 'date', 'hasArrived']; let i = index;">
+            <ng-container *ngIf="model !== -1">
+              <th scope="row">{{i + 1}}</th>
+              <td>{{model.price}}</td>
+              <td>{{model.date | date:'dd-MM-yyyy'}}</td>
+              <td>{{model.products.length}}</td>
+              <td>{{model.hasArrived}}</td>
+              <td>
+                <button type="button" class="btn btn-light btn-sm mr-3" (click)="edit(model.id)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="delete(model.id)">Excluir</button>
+              </td>
+            </ng-container>
+            <td *ngIf="model === -1" colspan="5"> Nenhum registro encontrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  
+    <div *ngIf="!models.length" class="row no-margin h-fullscreen" style="padding-top: 10%">
+      <div class="col-12">
+        <h3 class="text-uppercase">Nenhum pedido adicionado</h3>
+        <p class="lead">Clique no botão do canto superior direito para adicionar um novo pedido.</p>
+        <br>
+      </div>
+    </div>
+  
+  </div>

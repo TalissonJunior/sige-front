@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-5">Novo Pedido</h4>
+      <ng-container *ngIf="products.length">
+
+        <div class="pricing-header mx-auto text-left">
+          <div class="input-group search mb-3">
+            <input type="text" [(ngModel)]="search" class="form-control" placeholder="Pesquisar...">
+          </div>
+        </div>
+
+        <table class="table ">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Estoque</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products | filter: search : ['name', 'price', 'minCount', 'count']; let i = index;">
+              <ng-container *ngIf="product !== -1">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.price}} R$</td>
+                <td>{{product.stock }}</td>
+                <td>
+                  <div class="input-group add-group">
+                    <div class="input-group-prepend">
+                      <button type="button" class="btn btn-primary btn-sm " (click)="removeProduct(product.id)">-</button>
+                    </div>
+                    <input type="text" [(ngModel)]="product.value" class="form-control text-center">
+                    <div class="input-group-prepend">
+                      <button type="button" class="btn btn-primary btn-sm" (click)="addProduct(product.id)">+</button>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+              <td *ngIf="product === -1" colspan="5"> Nenhum registro encontrado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Seus produtos</span>
+        <span *ngIf="order.products.length" class="badge badge-secondary badge-pill">{{order.products.length}}</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li *ngFor="let product of order.products" class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">{{product.name}}</h6>
+          </div>
+          <span class="text-muted">{{product.value}} * {{product.price}} R$</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (REAL)</span>
+          <strong>{{order.price}}R$</strong>
+        </li>
+      </ul>
+
+      <div *ngIf="order.products.length" class="card p-2">
+        <div class="input-group">
+           <button class="btn btn-secondary btn-block" (click)="save()">Finalizar pedido</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

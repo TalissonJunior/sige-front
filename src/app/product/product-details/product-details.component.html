@@ -2,36 +2,41 @@
   <div class="row">
     <div class="col-md-12 order-md-1">
       <h4 class="mb-3">Novo Produto</h4>
-      <form class="needs-validation" novalidate>
+      <form [formGroup]="form">
         <div class="row">
 
           <div class="col-md-6 mb-3">
-            <label for="firstName">Nome</label>
-            <input type="text" class="form-control" placeholder="Detergente">
+            <label>Nome</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Informe...">
           </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="lastName">Preço</label>
-            <input type="text" class="form-control" placeholder="5.00">
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label for="username">Quantidade min.</label>
+          <div class="col-md-6 mb-3 ">
+              <label>Preço</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="0">
+              <div class="input-group-prepend">
+                <div class="input-group-text">R$</div>
+              </div>
+              <input formControlName="price" type="number" class="form-control" placeholder="Informe...">
             </div>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label for="address">Quantidade</label>
-            <input type="text" class="form-control" placeholder="15">
+            <label>Quantidade min.</label>
+            <div class="input-group">
+              <input formControlName="minCount" type="number" class="form-control" placeholder="Informe...">
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>Quantidade</label>
+            <input formControlName="count" type="number" class="form-control" placeholder="Informe...">
           </div>
 
         </div>
 
         <div class="float-right">
-          <button class="btn btn-light mr-3">Cancelar</button>
-          <button class="btn btn-primary " type="submit">Salvar</button>
+          <button class="btn btn-light mr-3" [routerLink]="['/products']">Cancelar</button>
+          <button class="btn btn-primary" [disabled]="form.invalid" (click)="save()">Salvar</button>
         </div>
 
       </form>

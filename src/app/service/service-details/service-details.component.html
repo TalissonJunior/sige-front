@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 order-md-1">
+        <h4 class="mb-3">Novo Serviço</h4>
+        <form [formGroup]="form">
+          <div class="row">
+  
+            <div class="col-md-12 mb-3">
+              <label>Detalhes</label>
+              <input formControlName="details" type="text" class="form-control" placeholder="Informe...">
+            </div>
+  
+            <div class="col-md-12 mb-3 ">
+              <label>Endereço</label>
+              <div class="input-group">
+                <input formControlName="address" type="text" class="form-control" placeholder="Informe...">
+              </div>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="state">Frequencia</label>
+              <select class="custom-select d-block w-100" formControlName="frequency">
+                <option value="0">Nenhuma</option>
+                <option value="1">Diária</option>
+                <option value="2">Semanal</option>
+                <option value="3">Mensal</option>
+                <option value="4">Anual</option>
+              </select>
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label>Data</label>
+              <div class="input-group">
+                <input formControlName="date" type="date" class="form-control" placeholder="Informe...">
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="float-right">
+            <button class="btn btn-light mr-3" [routerLink]="['/services']">Cancelar</button>
+            <button class="btn btn-primary" [disabled]="form.invalid" (click)="save()">Salvar</button>
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </div>
