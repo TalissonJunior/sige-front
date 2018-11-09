@@ -1,0 +1,43 @@
+<div class="container">
+    
+  <button type="button" class="float-right btn btn-primary">Novo Produto</button>
+
+  <ng-container *ngIf="models.length">
+
+    <div class="pricing-header mb-3 py-3 pt-md-5 pb-md-4 mx-auto text-left">
+      <h3 class="display-5 mb-3">Lista de produtos</h3>
+
+      <div class="input-group search mb-3">
+        <input type="text" class="form-control" placeholder="Pesquisar...">
+      </div>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Quantidade mín.</th>
+          <th scope="col">Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let model of models">
+          <th scope="row">1</th>
+          <td>{{model.Name}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <div *ngIf="!models.length" class="row no-margin h-fullscreen" style="padding-top: 10%">
+    <div class="col-12">
+        <h3 class="text-uppercase">Nenhum produto adicionado</h3>
+        <p class="lead">Clique no botão do canto superior direito para adicionar um novo produto.</p>
+        <br>
+    </div>
+  </div>
+
+</div>
